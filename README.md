@@ -1,7 +1,7 @@
 Facebook App (version 1.0)
 =========
 ---
-An simple entertainment recommendation app for Facebook built while learning to code at [Bloc](https://www.bloc.io/).
+An simple entertainment recommendation app for Facebook built while learning to code at [Bloc](https://www.bloc.io/). 
 
 
 Functions to add

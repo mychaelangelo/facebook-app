@@ -38,6 +38,15 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# Gems I added
+## GEMs I addeded
 
 gem 'rails_12factor', group: :production
+
+gem 'bootstrap-sass'
+
+gem 'faker'
+
+gem 'devise'
+
+
+
