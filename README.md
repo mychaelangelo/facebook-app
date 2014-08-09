@@ -22,6 +22,8 @@ cd facebook-app
 rails s
 ```
 
+* Refer to config/application.example.yml for keys required.
+
 ##### Configuration 
 
 * [ ]
