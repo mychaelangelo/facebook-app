@@ -38,7 +38,12 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-## GEMs I addeded
+## Gemss I addeded
+##
+
+group :test do
+  gem 'rspec-rails'  
+end
 
 gem 'rails_12factor', group: :production
 
