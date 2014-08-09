@@ -19,37 +19,41 @@
 
         <div class="pull-right user-info">
           <% if current_user %>
-            Hello <%= current_user.name %>
+            Hello, 
+            <%= link_to edit_user_registration_path do %>
+              <%= current_user.name || current_user.email %>
+            <% end %>
+
 
             <%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-sm' do %>
               <span class="glyphicon glyphicon-log-out"></span>
             <% end %>
 
           <% else %>
-            <%= link_to "Sign In With Facebook", new_user_session_path %>
+            <%= link_to "Sign In With Facebook", '/users/auth/facebook' %>
           <% end %>
         </div>
       </ul>
 
 
-      <!-- Area for Flash Notices -->
-      <% if flash[:notice] %>
-        <div class="alert alert-success">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <%= flash[:notice] %>
-        </div>
-
-        <% elsif flash[:error] %>
-          <div class="alert alert-danger">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <%= flash[:error] %>
-          </div>
-        <% elsif flash[:alert] %>
-          <div class="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <%= flash[:alert] %>
-          </div>
-      <% end %>
+      <!--flash messages-->
+       <% if flash[:notice] %>
+         <div class="alert alert-success">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <%= flash[:notice] %>
+         </div>
+       <% elsif flash[:error] %>
+         <div class="alert alert-danger">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <%= flash[:error] %>
+         </div>
+       <% elsif flash[:alert] %>
+         <div class="alert alert-warning">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <%= flash[:alert] %>
+         </div>
+       <% end %>
+      <!-- end of flash message area-->
 
 
       <%= yield %>
