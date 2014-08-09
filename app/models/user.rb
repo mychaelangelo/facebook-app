@@ -1,5 +1,14 @@
 class User < ActiveRecord::Base
+  # After new user create, assign to them a blank moviesuggestion instace
+  after_create :create_movie_suggestion
 
+  # each user will have one moviesuggestion instance
+  has_one :moviesuggestion, dependent: :destroy    
+
+
+  #Omniauth tutorial code
+  ######
+  ######
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
 
@@ -54,5 +63,14 @@ class User < ActiveRecord::Base
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
+  # End of Omniauth tutorial code
+  ######
+  ######
+
+  private
+    # assign empty moviesuggestion instance to new user
+    def create_movie_suggestion
+      self.create_moviesuggestion()
+    end
 
 end
