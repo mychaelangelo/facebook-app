@@ -58,6 +58,8 @@ gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
-gem 'redis', '2.1.1'
+# Redis installations, with Namespace which helps separate different redis applications
+gem 'redis'
+gem 'redis-namespace'
 
 

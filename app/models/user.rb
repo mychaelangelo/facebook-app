@@ -67,10 +67,29 @@ class User < ActiveRecord::Base
   ######
   ######
 
+  # Return string value of key for movies_liked, to be used to identify Redis set
+  def movies_liked_key
+    "user:#{self.id}:movies_liked"
+  end
+
+  # Returns the set of movies the user liked
+  def movies_liked
+    $redis.smembers movies_liked_key
+  end
+
+  # Add liked movie
+  def add_liked(movie_id)
+    $redis.sadd(movies_liked_key, movie_id)
+  end
+
+
+
   private
     # assign empty moviesuggestion instance to new user
     def create_movie_suggestion
       self.create_moviesuggestion()
     end
+
+
 
 end
