@@ -58,4 +58,6 @@ gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+gem 'redis', '2.1.1'
+
 
