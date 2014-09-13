@@ -67,6 +67,10 @@ class User < ActiveRecord::Base
   ######
   ######
 
+  #### REDIS-BASED FUNCTIONS
+  ###
+
+  # - LIKED MOVIES
   # Return string value of key for movies_liked, to be used to identify Redis set
   def movies_liked_key
     "user:#{self.id}:movies_liked"
@@ -74,12 +78,40 @@ class User < ActiveRecord::Base
 
   # Returns the set of movies the user liked
   def movies_liked
-    $redis.smembers movies_liked_key
+    REDIS.smembers movies_liked_key
   end
 
   # Add liked movie
   def add_liked(movie_id)
-    $redis.sadd(movies_liked_key, movie_id)
+    REDIS.sadd(movies_liked_key, movie_id)
+  end
+
+  # - DISLIKED MOVIES
+  # Return string value of key for movies_disliked, to be used to identify Redis set
+  def movies_disliked_key
+    "user:#{self.id}:movies_disliked"
+  end
+
+  # Returns the set of movies the user liked
+  def movies_disliked
+    REDIS.smembers movies_disliked_key
+  end
+
+  # Add liked movie
+  def add_disliked(movie_id)
+    REDIS.sadd(movies_disliked_key, movie_id)
+  end
+
+
+  #### RECOMMENDATION ALGORITHM
+
+  # step 1: pick random sample from list of liked movies (use 'movies_liked.sample' function)
+  # step 2: connect to rotten tomatoes API, and use similar-movies call with the sample from step 1 as source
+  # step 3: add the movie found to 'recommended list', unless it's already there, in which case find another movie
+  # step 4: wait on user to say if 'like' or 'dislike' and also store movie in appropriate place
+  def recommend
+    # pick sample from liked_movies
+    self.movies_liked.sample
   end
 
 
