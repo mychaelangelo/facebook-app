@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  #include RottenTomatoes API wrapper from https://github.com/nmunson/rottentomatoes
+  include RottenTomatoes
+  
+
+
   # After new user create, assign to them a blank moviesuggestion instace
   after_create :create_movie_suggestion
 
@@ -97,10 +102,16 @@ class User < ActiveRecord::Base
     REDIS.smembers movies_disliked_key
   end
 
-  # Add liked movie
+  # Add disliked movie
   def add_disliked(movie_id)
     REDIS.sadd(movies_disliked_key, movie_id)
   end
+
+  # Clear all liked movies set
+  def clear_liked
+    REDIS.del movies_liked_keye
+  end
+
 
 
   #### RECOMMENDATION ALGORITHM
@@ -109,9 +120,18 @@ class User < ActiveRecord::Base
   # step 2: connect to rotten tomatoes API, and use similar-movies call with the sample from step 1 as source
   # step 3: add the movie found to 'recommended list', unless it's already there, in which case find another movie
   # step 4: wait on user to say if 'like' or 'dislike' and also store movie in appropriate place
+  
+  # Set my rotten tomatoes API key
+  Rotten.api_key = "hhwvunztsczvsw3yusb768t7"
+
+
+
   def recommend
     # pick sample from liked_movies
-    self.movies_liked.sample
+    seed_movie_id = self.movies_liked.sample
+
+    @movie = RottenList.find(:id => seed_movie_id, :similar => true, :limit => 5)
+    @movie.sample
   end
 
 
