@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'favorites/index'
+
+  get 'favorites/add'
+
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
 
   root 'home#index'

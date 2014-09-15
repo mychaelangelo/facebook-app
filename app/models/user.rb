@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   #include RottenTomatoes API wrapper from https://github.com/nmunson/rottentomatoes
-  include RottenTomatoes
+  require 'httparty'
   
 
 
@@ -121,17 +121,17 @@ class User < ActiveRecord::Base
   # step 3: add the movie found to 'recommended list', unless it's already there, in which case find another movie
   # step 4: wait on user to say if 'like' or 'dislike' and also store movie in appropriate place
   
-  # Set my rotten tomatoes API key
-  Rotten.api_key = "hhwvunztsczvsw3yusb768t7"
 
-
-
-  def recommend
-    # pick sample from liked_movies
-    seed_movie_id = self.movies_liked.sample
-
-    @movie = RottenList.find(:id => seed_movie_id, :similar => true, :limit => 5)
-    @movie.sample
+  # HTTParty version
+  def similar_movies
+    # pick random sample from list of liked movies
+    seed_id = self.movies_liked.sample
+    api_key = "hhwvunztsczvsw3yusb768t7"
+    
+    response = 
+      HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies/770672122/similar.json?limit=5&apikey=#{api_key}")
+    json = JSON.parse(response.body)
+    json
   end
 
 

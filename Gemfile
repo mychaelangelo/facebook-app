@@ -62,7 +62,8 @@ gem 'omniauth-facebook'
 gem 'redis'
 gem 'redis-namespace'
 
-# Rotten Tomatoes API wrapper
-gem 'rottentomatoes'
+
+# Get HTTParty gem
+gem 'httparty'
 
 
