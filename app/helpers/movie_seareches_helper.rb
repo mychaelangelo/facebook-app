@@ -1,0 +1,2 @@
+module MovieSearechesHelper
+end

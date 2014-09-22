@@ -13,5 +13,19 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require twitter/typeahead
+//= require autocomplete-rails
 //= require_tree .
 //= require bootstrap
+
+
+//= require jquery.tokeninput
+
+$(document).ready(function(e){
+  // tonkenInput
+  $("#movie_search").tokenInput("/movie_searches", {
+                searchDelay: 10,
+                minChars: 2,
+            });
+});
+

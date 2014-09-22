@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   #Omniauth tutorial code
   ######
   ######
-  TEMP_EMAIL_PREFIX = 'change@me'
+  TEMP_EMAIL_PREFIX = 'change@me' 
   TEMP_EMAIL_REGEX = /\Achange@me/
 
   # Include default devise modules. Others available are:
@@ -88,6 +88,7 @@ class User < ActiveRecord::Base
 
   # Add liked movie
   def add_liked(movie_id)
+    
     REDIS.sadd(movies_liked_key, movie_id)
   end
 
@@ -109,7 +110,7 @@ class User < ActiveRecord::Base
 
   # Clear all liked movies set
   def clear_liked
-    REDIS.del movies_liked_keye
+    REDIS.del movies_liked_key
   end
 
 
@@ -121,17 +122,25 @@ class User < ActiveRecord::Base
   # step 3: add the movie found to 'recommended list', unless it's already there, in which case find another movie
   # step 4: wait on user to say if 'like' or 'dislike' and also store movie in appropriate place
   
-
   # HTTParty version
-  def similar_movies
-    # pick random sample from list of liked movies
-    seed_id = self.movies_liked.sample
+  def similar_movie
+    # will need to use figaro to store this api
     api_key = "hhwvunztsczvsw3yusb768t7"
+
+
+    # pick random sample from list of liked movies
+    seed = self.movies_liked.sample
+    similar_url = "http://api.rottentomatoes.com/api/public/v1.0/movies/#{seed}/similar.json?limit=5&apikey=#{api_key}"
     
-    response = 
-      HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies/770672122/similar.json?limit=5&apikey=#{api_key}")
+    response = HTTParty.get(similar_url)
     json = JSON.parse(response.body)
     json
+
+    # choose sample movie object from json movies results
+    similar_choice = json["movies"].sample 
+
+    # return title of movie recommendation - will need to also return id
+    similar_choice["title"]
   end
 
 

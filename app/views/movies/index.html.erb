@@ -1,0 +1,13 @@
+<h1>My Movies</h1>
+
+Movies I like: 
+<% @favorites.each do |movie| %>
+  <li><%= movie %></li>
+<% end %>
+
+<br>
+
+Movies I dislike:
+<% @dislikes.each do |movie| %>
+  <li><%= movie %></li>
+<% end %>

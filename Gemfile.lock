@@ -67,6 +67,7 @@ GEM
     jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-tokeninput-rails (1.6.0)
     json (1.8.1)
     jwt (1.0.0)
     mail (2.5.4)
@@ -109,6 +110,8 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.1)
       sprockets-rails (~> 2.0)
+    rails3-jquery-autocomplete (1.0.14)
+      rails (>= 3.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
@@ -168,6 +171,10 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.2.2)
       coffee-rails
+    twitter-typeahead-rails (0.10.5)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -188,10 +195,12 @@ DEPENDENCIES
   httparty
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-tokeninput-rails
   omniauth
   omniauth-facebook
   pg
   rails (= 4.1.1)
+  rails3-jquery-autocomplete
   rails_12factor
   redis
   redis-namespace
@@ -200,4 +209,5 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   spring
   turbolinks
+  twitter-typeahead-rails
   uglifier (>= 1.3.0)

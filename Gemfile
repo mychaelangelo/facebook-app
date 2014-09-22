@@ -66,4 +66,8 @@ gem 'redis-namespace'
 # Get HTTParty gem
 gem 'httparty'
 
+gem 'jquery-tokeninput-rails'
 
+gem 'twitter-typeahead-rails'
+
+gem 'rails3-jquery-autocomplete'

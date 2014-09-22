@@ -1,18 +1,27 @@
 Rails.application.routes.draw do
 
+  get 'movies/index'
+
+  get 'movies/new'
+
+  get 'movies/show'
+
+  get 'movies/edit'
+
   get 'favorites/index'
 
   get 'favorites/add'
 
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
 
+  resources :movie_searches, only: [:index]
   root 'home#index'
 
   get 'about' => 'home#about'
   get 'privacy' => 'home#privacy'
   get 'recommend' => 'home#recommend'
 
-  
+  resources :movies
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

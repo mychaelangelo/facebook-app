@@ -1,0 +1,16 @@
+<h1>Add Favorite Movies</h1>
+
+<p>Enter first word of your movie search (only works with one word)</p>
+<%= form_tag movies_url do %>
+  <%= text_field_tag 'liked_movies', nil, id: "movie_search" %>
+  <br/>
+  <%= submit_tag 'Add' %>
+<% end %>
+
+
+My current favorites
+<ul id="favorites">
+  <% @favorites.each do |favorite| %>
+    <li><%= favorite %></li>
+  <% end %>
+</ul>
