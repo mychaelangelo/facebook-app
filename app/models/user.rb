@@ -139,8 +139,13 @@ class User < ActiveRecord::Base
     # choose sample movie object from json movies results
     similar_choice = json["movies"].sample 
 
-    # return title of movie recommendation - will need to also return id
-    similar_choice["title"]
+    # if result is nil movie i.e. empty array, return nil value
+    if similar_choice.nil?
+      nil
+    else
+      # return title of movie recommendation - will need to also return id
+      similar_choice["title"]
+    end
   end
 
 

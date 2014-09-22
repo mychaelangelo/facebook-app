@@ -1,0 +1,13 @@
+<h1>Find Me a Movie</h1>
+
+
+
+<%= link_to "Click for Next Suggestion", suggestions_index_path %>
+
+<hr>
+
+<% if @suggestion.nil? %>
+  I couldn't find anything, please try again :)
+<% else %>
+  <%= @suggestion %>
+<% end %>

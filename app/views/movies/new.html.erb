@@ -4,10 +4,11 @@
 <%= form_tag movies_url do %>
   <%= text_field_tag 'liked_movies', nil, id: "movie_search" %>
   <br/>
-  <%= submit_tag 'Add' %>
+  <%= submit_tag 'Add Favorite Movies',class: 'btn btn-primary' %>
+  
 <% end %>
 
-
+<hr>
 My current favorites
 <ul id="favorites">
   <% @favorites.each do |favorite| %>

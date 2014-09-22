@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'suggestions/index'
+
   get 'movies/index'
 
   get 'movies/new'
