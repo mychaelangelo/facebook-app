@@ -88,7 +88,6 @@ class User < ActiveRecord::Base
 
   # Add liked movie
   def add_liked(movie_id)
-    
     REDIS.sadd(movies_liked_key, movie_id)
   end
 
@@ -136,16 +135,16 @@ class User < ActiveRecord::Base
     json = JSON.parse(response.body)
     json
 
-    # choose sample movie object from json movies results
-    similar_choice = json["movies"].sample 
-
-    # if result is nil movie i.e. empty array, return nil value
-    if similar_choice.nil?
+    if json["movies"].nil?
+      #if the movies part of json is nil, return nil
       nil
     else
+      # choose sample movie object from json movies results
+      similar_choice = json["movies"].sample 
       # return title of movie recommendation - will need to also return id
-      similar_choice["title"]
+      similar_choice
     end
+    
   end
 
 

@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
   def index
     @favorites = current_user.movies_liked
     @dislikes = current_user.movies_disliked
-  end
+  end 
 
   def new
     @favorites = current_user.movies_liked

@@ -2,12 +2,28 @@
 
 
 
-<%= link_to "Click for Next Suggestion", suggestions_index_path %>
+<%= button_to "Click for New Suggestion", suggestions_path, class: "btn btn-default" %>
 
 <hr>
 
 <% if @suggestion.nil? %>
-  I couldn't find anything, please try again :)
+  I couldn't find anything, please try again or add some new favorite movies :)
+  <br>
 <% else %>
-  <%= @suggestion %>
+  <%= @suggestion["title"] %>
+  (<%= @suggestion["year"] %>)
+  <p>
+    <%= image_tag(@suggestion["posters"]["original"]) %><br>
+    <%= @suggestion["synopsis"] %>
+  </p>
+  <!-- like/dislike area -->
+  <%= button_to "Like Movie", :rott_id => @suggestion["id"], method: :post %>
+  <br>
+  <%= button_to "Dislike Movie", :rott_id => @suggestion["id"], method: :delete %>
+  <br>
+  <%= link_to "Dislike Movie", :rott_id => @suggestion["id"], method: :delete %>
+
+
+  <!--end of likes -->
 <% end %>
+

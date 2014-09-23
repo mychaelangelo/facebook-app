@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'suggestions/index'
+  resources :suggestions
 
   get 'movies/index'
 
