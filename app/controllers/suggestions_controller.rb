@@ -6,12 +6,14 @@ class SuggestionsController < ApplicationController
   end
 
   def create
-    current_user.add_liked(params[:rott_id])
+    current_user.add_liked(params[:id])
     redirect_to :back
   end
 
   def destroy
-    current_user.add_disliked(params[:rott_id])
+    current_user.add_disliked(params[:id])
     redirect_to :back
   end
+
+
 end

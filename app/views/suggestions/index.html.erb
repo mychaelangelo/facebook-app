@@ -17,13 +17,11 @@
     <%= @suggestion["synopsis"] %>
   </p>
   <!-- like/dislike area -->
-  <%= button_to "Like Movie", :rott_id => @suggestion["id"], method: :post %>
+  <%= button_to "Like Movie", :id => @suggestion["id"], method: :post %>
   <br>
-  <%= button_to "Dislike Movie", :rott_id => @suggestion["id"], method: :delete %>
-  <br>
-  <%= link_to "Dislike Movie", :rott_id => @suggestion["id"], method: :delete %>
+  <%= button_to "Dislike Movie", {:controller => :suggestions, :action => 'destroy', :id => @suggestion["id"] }, method: :delete %>
 
 
   <!--end of likes here -->
-<% end %>
+<% end %> 
 

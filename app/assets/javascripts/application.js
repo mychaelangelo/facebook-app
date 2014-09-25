@@ -17,8 +17,6 @@
 //= require autocomplete-rails
 //= require_tree .
 //= require bootstrap
-
-
 //= require jquery.tokeninput
 
 $(document).ready(function(e){
