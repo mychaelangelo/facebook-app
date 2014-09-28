@@ -20,7 +20,7 @@
 
         <% if current_user %>
           <% if current_user.movies_liked.empty? %>
-            <li><%= link_to "Find Me a Movie", movies_new_path %></li>
+            <li><%= link_to "Find Me a Movie", '/movies/new' %></li>
           <% else %>
             <li><%= link_to "Find Me a Movie", suggestions_path %></li>
           <% end %>
@@ -31,7 +31,7 @@
           <li><%= link_to "My Movies", movies_path %></li>
         <% end %>
         <% if current_user %>
-          <li><%= link_to "Add Favorites", "/movies/new" %></li>
+          <li><%= link_to "Add Favorites", '/movies/new' %></li>
         <% end %>
 
 

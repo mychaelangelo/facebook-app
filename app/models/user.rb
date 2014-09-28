@@ -2,15 +2,6 @@ class User < ActiveRecord::Base
   #include RottenTomatoes API wrapper from https://github.com/nmunson/rottentomatoes
   require 'httparty'
   
-
-
-  # After new user create, assign to them a blank moviesuggestion instace
-  after_create :create_movie_suggestion
-
-  # each user will have one moviesuggestion instance
-  has_one :moviesuggestion, dependent: :destroy    
-
-
   #Omniauth tutorial code
   ######
   ######
@@ -71,10 +62,9 @@ class User < ActiveRecord::Base
   # End of Omniauth tutorial code
   ######
   ######
-
+#---------------------------------------------
   #### REDIS-BASED FUNCTIONS
-  ###
-
+  ####
   # - LIKED MOVIES
   # Return string value of key for movies_liked, to be used to identify Redis set
   def movies_liked_key
@@ -111,8 +101,11 @@ class User < ActiveRecord::Base
   def clear_liked
     REDIS.del movies_liked_key
   end
-
-
+  
+# Clear all liked movies set
+  def clear_disliked
+    REDIS.del movies_disliked_key
+  end
 
   #### RECOMMENDATION ALGORITHM
 
@@ -121,40 +114,30 @@ class User < ActiveRecord::Base
   # step 3: add the movie found to 'recommended list', unless it's already there, in which case find another movie
   # step 4: wait on user to say if 'like' or 'dislike' and also store movie in appropriate place
   
-  # HTTParty version
+  # Returns movie json object
   def similar_movie
-    # will need to use figaro to store this api
-    api_key = "hhwvunztsczvsw3yusb768t7"
-
+    apikey = ENV['MOVIE_API_KEY']
 
     # pick random sample from list of liked movies
     seed = self.movies_liked.sample
-    similar_url = "http://api.rottentomatoes.com/api/public/v1.0/movies/#{seed}/similar.json?limit=5&apikey=#{api_key}"
     
+    # collect movie JSON object of similar movies list
+    similar_url = "http://api.rottentomatoes.com/api/public/v1.0/movies/#{seed}/similar.json?limit=5&apikey=#{apikey}"
     response = HTTParty.get(similar_url)
     json = JSON.parse(response.body)
-    json
 
     if json["movies"].nil?
       #if the movies part of json is nil, return nil
       nil
     else
-      # choose sample movie object from json movies results
-      similar_choice = json["movies"].sample 
-      # return title of movie recommendation - will need to also return id
-      similar_choice
+      # this function returns the first movie object whose id is neither not already in either the liked or disliked lists
+      # it automatically returns 'nil' is no unique movie is found
+      json["movies"].detect { |m|
+        !(self.movies_liked.include?(m["id"])) and !(self.movies_disliked.include?(m["id"]))
+      }
     end
-    
+
   end
-
-
-
-  private
-    # assign empty moviesuggestion instance to new user
-    def create_movie_suggestion
-      self.create_moviesuggestion()
-    end
-
 
 
 end

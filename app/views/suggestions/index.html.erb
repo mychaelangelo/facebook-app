@@ -1,26 +1,36 @@
-<h1>Find Me a Movie</h1>
+<h3>Find Me a Movie</h3>
 
 
 
-<%= button_to "Click for New Suggestion", suggestions_path, class: "btn btn-default" %>
+<%= button_to "Next Suggestion", suggestions_path, class: "btn btn-default" %>
 
 <hr>
 
-<% if @suggestion.nil? %>
-  I couldn't find anything, please try again or add some new favorite movies :)
-  <br>
-<% else %>
+  <% if @suggestion.nil? %>
+    I couldn't find anything, please try again or add some new favorite movies :)
+    <br>
+  <% else %>
   <%= @suggestion["title"] %>
   (<%= @suggestion["year"] %>)
+
+  <small>
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" style="width: <%= @suggestion["ratings"]["audience_score"] %>%">
+          <%= @suggestion["ratings"]["audience_score"] %>% of people like it.
+        </div>
+    </div>
+  </small>
+
   <p>
     <%= image_tag(@suggestion["posters"]["original"]) %><br>
     <%= @suggestion["synopsis"] %>
   </p>
+  <%= link_to "View on Rotten Tomatoes", @suggestion["links"]["alternate"], :target => "_blank" %>
   <!-- like/dislike area -->
+  <br>
   <%= button_to "Like Movie", :id => @suggestion["id"], method: :post %>
   <br>
   <%= button_to "Dislike Movie", {:controller => :suggestions, :action => 'destroy', :id => @suggestion["id"] }, method: :delete %>
-
 
   <!--end of likes here -->
 <% end %> 

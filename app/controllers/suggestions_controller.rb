@@ -12,7 +12,7 @@ class SuggestionsController < ApplicationController
 
   def destroy
     current_user.add_disliked(params[:id])
-    redirect_to :back
+    redirect_to :back 
   end
 
 

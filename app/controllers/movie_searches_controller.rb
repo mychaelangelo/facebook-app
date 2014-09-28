@@ -8,7 +8,7 @@ class MovieSearchesController < ApplicationController
   def index
     @query = params[:q]
     # APi key (will need to use figaro hide this)
-    api_key = "hhwvunztsczvsw3yusb768t7"
+    api_key = ENV['MOVIE_API_KEY']
     search_url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=#{params[:q]}&page_limit=10&page=1&apikey=#{api_key}"
     response = HTTParty.get(search_url)
     jsonresult = JSON.parse(response.body)["movies"]

@@ -1,11 +1,11 @@
 <h1>Add Favorite Movies</h1>
 
 <p>Add some favorite movies so I can know what type of films you like :)</p>
+
 <%= form_tag movies_url do %>
   <%= text_field_tag 'liked_movies', nil, id: "movie_search" %>
-  <br/>
-  <%= submit_tag 'Add Favorite Movies',class: 'btn btn-primary' %>
-  
+  <br>
+  <%= submit_tag 'Add Favorite Movies', class: 'btn btn-primary' %>
 <% end %>
 
 <hr>

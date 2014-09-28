@@ -22,7 +22,7 @@
 $(document).ready(function(e){
   // tonkenInput
   $("#movie_search").tokenInput("/movie_searches", {
-                searchDelay: 10,
+                searchDelay: 5,
                 minChars: 2,
             });
 });
