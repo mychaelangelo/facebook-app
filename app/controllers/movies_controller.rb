@@ -1,7 +1,13 @@
 class MoviesController < ApplicationController
   def index
+    api_key = ENV['MOVIE_API_KEY']
+
     @favorites = current_user.movies_liked
     @dislikes = current_user.movies_disliked
+  
+
+
+
   end 
 
   def new
