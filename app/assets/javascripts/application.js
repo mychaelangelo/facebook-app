@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require twitter/typeahead
 //= require autocomplete-rails
 //= require_tree .
