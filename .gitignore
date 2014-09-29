@@ -17,3 +17,6 @@
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore the development.rb file since it has Redis details
+/config/environments/development.rb
