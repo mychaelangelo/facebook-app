@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
   # - DISLIKED MOVIES
   # Return string value of key for movies_disliked, to be used to identify Redis set
   def movies_disliked_key
-    "user:#{self.id}:movies_disliked"
+    "user:#{self.id}:movies_disliked" 
   end
 
   # Returns the set of movies the user liked

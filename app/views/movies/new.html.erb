@@ -1,17 +1,15 @@
-<h1>Add Favorite Movies</h1>
-
-<p>Add some favorite movies so I can know what type of films you like :)</p>
-
+<h3>Add Favorite Movies.
+  <small>
+    This search connects to the Rotten Tomatoes database so it may take a bit of time to load.
+    Enter only <b>one word</b> and give it a few seconds to load.
+  </small>
+</h3>
+<i>Enter movie name below. The more favorites you add, the better the suggestion engine.</i>
 <%= form_tag movies_url do %>
-  <%= text_field_tag 'liked_movies', nil, id: "movie_search" %>
+  <%= text_field_tag 'liked_movies', nil,  id: "movie_search" %>
   <br>
   <%= submit_tag 'Add Favorite Movies', class: 'btn btn-primary' %>
 <% end %>
 
 <hr>
-My current favorites
-<ul id="favorites">
-  <% @favorites.each do |favorite| %>
-    <li><%= favorite %></li>
-  <% end %>
-</ul>
+

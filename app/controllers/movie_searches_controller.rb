@@ -18,18 +18,6 @@ class MovieSearchesController < ApplicationController
     render json: jsonresult.map{|movie| {:id => movie["id"], :name => movie["title"]}   }
   end
 
-=begin
-  def index
-        sample = [
-        {id: "3", name: "elad"},
-        {id: "4", name: "Chelsea"},
-        {id: "5", name: "Gerard"},
-    ]
-    render json: sample
-  end
-=end
-
-
 
   def show
 

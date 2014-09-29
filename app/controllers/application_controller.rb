@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   #override redirect page after sign in
   def after_sign_in_path_for(resource)
     # will redirect user to the recommendation page
-    recommend_path
+    movies_new_path
   end
 end

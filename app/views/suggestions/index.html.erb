@@ -1,17 +1,19 @@
 <h3>Find Me a Movie</h3>
 
-
-
 <%= button_to "Next Suggestion", suggestions_path, class: "btn btn-default" %>
 
-<hr>
 
   <% if @suggestion.nil? %>
     I couldn't find anything, please try again or add some new favorite movies :)
     <br>
   <% else %>
-  <%= @suggestion["title"] %>
-  (<%= @suggestion["year"] %>)
+  <h4>
+    <%= @suggestion["title"] %>
+    <small>
+        (<%= @suggestion["year"] %>)
+    </small>
+  </h4>
+
 
   <small>
     <div class="progress">
@@ -34,4 +36,5 @@
 
   <!--end of likes here -->
 <% end %> 
+<hr>
 
